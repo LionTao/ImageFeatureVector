@@ -3,8 +3,8 @@ import numpy as np
 import modules.ImageFeatureVector.HistogramVector.hisvec as hv
 
 
-def difference_between_image(img1: 'str', img2: 'str') -> float:
-    '''
+def difference_between_image(img1: str, img2: str) -> float:
+    """
     Compare two image.
     Firstly, get their feature vector.
     Then, calculate pair histograms' bhattacharyya distance.
@@ -12,7 +12,7 @@ def difference_between_image(img1: 'str', img2: 'str') -> float:
     :param img1:
     :param img2:
     :return: a float number between 0(same) and 1(different)
-    '''
+    """
     V1 = hv.get_vector(img1)
     V2 = hv.get_vector(img2)
     res = []
@@ -21,8 +21,8 @@ def difference_between_image(img1: 'str', img2: 'str') -> float:
     return np.linalg.norm(res) / 20
 
 
-def difference_between_image_vector(img: 'str', V: 'np.array') -> float:
-    '''
+def difference_between_image_vector(img: str, V: np.array) -> float:
+    """
     Compare an image with a 20-histograms vector
     Firstly, get it feature vector.
     Then, calculate pair histograms' bhattacharyya distance.
@@ -30,7 +30,7 @@ def difference_between_image_vector(img: 'str', V: 'np.array') -> float:
     :param img:
     :param V: a 20-histograms array
     :return: a float number between 0(same) and 1(different)
-    '''
+    """
     _V = hv.get_vector(img)
     res = []
     for i in range(20):

@@ -5,11 +5,11 @@ import modules.ColourDifference.slic as slic
 import modules.PatternDifference.ImProj as imp
 
 
-def get_guass(shape: '2D tuple') -> numpy.array:
-    '''
+def get_guass(shape: tuple) -> numpy.array:
+    """
     :param shape: the shape of matrix
     :return: a matrix with 2D Gaussian distribution
-    '''
+    """
     x, y = numpy.meshgrid(numpy.linspace(-1, 1, shape[0]), numpy.linspace(-1, 1, shape[1]))
     d = numpy.sqrt(x * x + y * y)
     sigma, mu = 0.6, 0.0
@@ -17,22 +17,22 @@ def get_guass(shape: '2D tuple') -> numpy.array:
     return g.T
 
 
-def get_his(img: 'numpy.array') -> float:
-    '''
+def get_his(img: numpy.array) -> float:
+    """
     Firstly, get the image's histogram, then get the norm.
     :param img: image (split)
     :return: the norm the image's histogram
-    '''
+    """
     return cv2.calcHist([img], [0], None, [256], [0, 256])
 
 
-def get_weight(file: 'str') -> numpy.array:
-    '''
+def get_weight(file: str) -> numpy.array:
+    """
     Using module ColourDifference and PatternDifference,
     to get the visually significant matrix
     :param file: the name of the file(due to the definition of others' interface)
     :return: the visually significant matrix
-    '''
+    """
     img = cv2.imread(file, 0)
     G = get_guass(img.shape)
     C_processor = slic.SLICProcessor(file, 64)
@@ -47,12 +47,12 @@ def get_weight(file: 'str') -> numpy.array:
     return numpy.multiply(D, G)
 
 
-def get_vector(file: 'str') -> numpy.array:
-    '''
+def get_vector(file: str) -> numpy.array:
+    """
     Image retrieval based on spatial pyramid of visual saliency.
     :param file: image
     :return: feature vector V'
-    '''
+    """
     V = []
     img = cv2.imread(file, flags=0)
     length, width = img.shape
